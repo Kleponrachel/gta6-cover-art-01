@@ -1,0 +1,6 @@
+[
+  { "name": "1-cover.jpg", "query": "?shot=cover&layout=grid9&grade=neon&title=NEON%20SHORE&subtitle=a%20Leonida%20story&photo=sunset", "w": 1080, "h": 1080 },
+  { "name": "2-editor.jpg", "query": "?shot=editor&layout=hero3&grade=sunset&title=SUNSET%20HEIST", "w": 1280, "h": 720 },
+  { "name": "3-cover.jpg", "query": "?shot=cover&layout=hero3&grade=sunset&title=SUNSET%20HEIST&subtitle=a%20Leonida%20story&photo=boulevard", "w": 1080, "h": 1080 },
+  { "name": "4-cover.jpg", "query": "?shot=cover&layout=tilt&grade=vice&title=VICE%20NIGHTS&subtitle=downtown%20after%20dark&photo=neon", "w": 1080, "h": 1080 }
+]
