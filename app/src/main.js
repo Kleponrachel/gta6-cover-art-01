@@ -136,7 +136,8 @@ function panelCount() {
   return layoutGeometry(state.layout, 1, 1).panels.length;
 }
 
-export function syncControls() {  const q = (id) => document.getElementById(id);
+export function syncControls() {
+  const q = (id) => document.getElementById(id);
   if (q('layout')) q('layout').value = state.layout;
   if (q('grade')) q('grade').value = state.grade;
   if (q('size')) q('size').value = state.size;

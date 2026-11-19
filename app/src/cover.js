@@ -32,9 +32,8 @@ const INK = '#14101c';
 
 // --- layout geometry -------------------------------------------------------
 // Returns { panels: [{x,y,w,h,rot}], title: {x,y,w,h,mode} } in 0..1 coords.
+// All rects are normalized, so the canvas size never changes the layout.
 export function layoutGeometry(layout, w, h) {
-  const sq = w / h; // aspect helper is unused; rects are normalized
-  void sq;
   switch (layout) {
     case 'hero3':
       return {

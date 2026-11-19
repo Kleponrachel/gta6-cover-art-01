@@ -1,5 +1,6 @@
 // Fixed scenes for screenshots: ?shot=editor shows the app with samples loaded;
-// ?shot=cover shows the cover alone. Query params pick the scene:
+// ?shot=cover shows the cover alone. Rewritten for the recorded build: same scenes.
+// Query params pick the scene:
 // layout, grade, size, title, subtitle, badge, photo (sample name for the hero).
 // window.__shotReady is set once painted.
 import { loadImage, loadSamples, state, syncControls } from './main.js';

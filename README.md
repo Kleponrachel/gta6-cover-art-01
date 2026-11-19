@@ -32,6 +32,6 @@ Or open `app/index.html` directly from disk (ES modules need a server or a
 
 - `app/` — the whole app as static files: `index.html`, `style.css`, `src/cover.js` (the render engine: layouts, grades, lettering, grain), `src/main.js` (wiring, undo/redo, export), `src/shots.js` (fixed `?shot=` scenes for screenshots), `samples/` (5 sample photos: 2 AI-made photos from the kit plus 3 drawn sunset/neon/rooftop scenes), `fonts/` (Anton & Pacifico, SIL Open Font License).
 - `main.ts` — hands `app/` and `screenshots/` in and writes `dossier.json`.
-- `screenshots/` — 4 shots: the nine-panel cover, the editor with a photo loaded, the hero cover, the tilted-snapshot cover.
+- `screenshots/` — 4 shots: the nine-panel cover, the editor with a photo loaded, the hero cover, the tilted-snapshot cover. All four are 1280×800 or 1080×1080 JPEGs under 256 KiB, shot with Playwright (`shots.js` in the project root).
 
 No Rockstar Games logo, artwork or fonts are used anywhere. The title art is drawn by the app itself.

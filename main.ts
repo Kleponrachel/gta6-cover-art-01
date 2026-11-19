@@ -1,5 +1,6 @@
 // Vice Coast Cover Studio — a gta6-cover-art-01 entry (Node 22, standard
-// library only). The app is this directory's app/ folder: plain static files
+// library only). Rewritten for the recorded build: same hand-in, same caps.
+// The app is this directory's app/ folder: plain static files
 // a desktop browser loads offline (app/index.html and its ES modules, the
 // Anton and Pacifico fonts vendored under app/fonts/, no library and no
 // network request), and this program hands it in. It copies app/ and
