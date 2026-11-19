@@ -1,63 +1,106 @@
-<!-- Vice Coast Cover Studio — the cover editor page.
-     Rewritten for the recorded build: same controls, same canvas. -->
 <!doctype html>
+<!-- Vice Coast Cover Studio — turn your photos into GTA 6-style cover art.
+     Offline, in the browser: pick a layout and a grade, letter it, export PNG. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vice Coast Cover Studio — GTA 6-style cover art, offline</title>
-<link rel="stylesheet" href="./style.css">
+<title>Vice Coast Cover Studio — GTA 6-style cover art</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="app">
-  <section class="controls" aria-label="Cover controls">
-    <h1>Vice Coast<br>Cover Studio</h1>
-    <p class="tag">Your photos into GTA 6-style multi-panel cover art. Offline, no upload, no watermark.</p>
-
-    <label>Photos <span class="hint">up to 9 — click a panel to pick it, then replace</span>
-      <input id="photos" type="file" accept="image/*" multiple>
-    </label>
-    <p class="panel-row"><span id="panelLabel">Panel 1 of 4</span>
-      <label class="zoom">Zoom <input id="zoom" type="range" min="1" max="3" step="0.05" value="1"></label>
-      <button id="resetCrop" type="button" class="small">Reset crop</button>
-    </p>
-    <p class="hint">Drag the cover to move the selected photo. Scroll to zoom it.</p>
-
-    <label>Layout
-      <select id="layout"></select>
-    </label>
-    <label>Grade
-      <select id="grade"></select>
-    </label>
-    <label>Post size
-      <select id="size"></select>
-    </label>
-
-    <label>Title <input id="title" type="text" maxlength="24" value="NEON SHORE"></label>
-    <label>Subtitle <input id="subtitle" type="text" maxlength="40" value="a Leonida story"></label>
-    <label>Badge <input id="badge" type="text" maxlength="24" value="LEONIDA • 2026"></label>
-
-    <label class="check"><input id="grain" type="checkbox" checked> Film grain</label>
-    <label class="check"><input id="vignette" type="checkbox" checked> Vignette</label>
-
-    <div class="row">
-      <button id="undo" type="button" class="small" disabled>Undo</button>
-      <button id="redo" type="button" class="small" disabled>Redo</button>
+<header class="masthead">
+  <div class="brand">
+    <span class="brand-mark">VC</span>
+    <div>
+      <h1>Vice Coast Cover Studio</h1>
+      <p>Your photos, pressed into a Leonida poster — offline, no watermark.</p>
     </div>
+  </div>
+  <div class="mast-actions">
+    <button type="button" data-action="undo" disabled>↩ Undo</button>
+    <button type="button" data-action="redo" disabled>↪ Redo</button>
+    <button type="button" data-action="shuffle" class="accent">🎲 Surprise me</button>
+  </div>
+</header>
 
-    <div class="exports">
-      <button id="exportSquare" type="button">PNG 1080 × 1080</button>
-      <button id="exportPortrait" type="button">PNG 1080 × 1350</button>
-      <button id="exportWide" type="button">PNG 1920 × 1080</button>
-      <button id="exportAll" type="button" class="primary">Export all three</button>
+<main class="workbench">
+  <section class="press-room" aria-label="Poster preview">
+    <div class="canvas-wrap">
+      <canvas id="stage" width="800" height="800"></canvas>
+      <p class="hint">Click a panel to pick it · drag to move its photo · scroll to zoom</p>
     </div>
-    <p id="status" role="status"></p>
-    <p class="fine">Made with your own photos. No Rockstar Games logo, artwork or fonts. Anton &amp; Pacifico under the SIL Open Font License.</p>
+    <div id="dropzone" class="dropzone" role="button" tabindex="0">
+      <strong>Drop photos here</strong> or click to choose up to 9 images — they never leave your machine.
+      <input id="file-input" type="file" accept="image/*" multiple hidden>
+    </div>
+    <div id="tray" class="tray" aria-label="Your photos"></div>
   </section>
-  <section class="stage">
-    <canvas id="cover" width="760" height="760" aria-label="The cover"></canvas>
-  </section>
+
+  <aside class="control-rail">
+    <section class="panel">
+      <h2>1 · Photos</h2>
+      <button type="button" data-action="samples">Load the five sample photos</button>
+      <p class="note">Panels fill in order. Click a thumbnail to put that photo in the picked panel.</p>
+    </section>
+
+    <section class="panel">
+      <h2>2 · Layout &amp; grade</h2>
+      <label>Layout
+        <select id="layout"></select>
+      </label>
+      <label>Grade
+        <select id="grade"></select>
+      </label>
+      <label>Photo zoom — picked panel
+        <input id="zoom" type="range" min="100" max="400" value="100">
+      </label>
+      <button type="button" data-action="reset-crop">Reset the picked panel's crop</button>
+    </section>
+
+    <section class="panel">
+      <h2>3 · Lettering</h2>
+      <label>Title
+        <input id="title" type="text" value="VICE CITY" maxlength="40">
+      </label>
+      <label>Subtitle
+        <input id="subtitle" type="text" value="a Leonida story" maxlength="60">
+      </label>
+      <label>Badge
+        <input id="badge" type="text" value="VI" maxlength="6">
+      </label>
+    </section>
+
+    <section class="panel">
+      <h2>4 · Print finish</h2>
+      <label>Film grain
+        <input id="grain" type="range" min="0" max="100" value="60">
+      </label>
+      <label>Vignette
+        <input id="vignette" type="range" min="0" max="100" value="60">
+      </label>
+    </section>
+
+    <section class="panel export-panel">
+      <h2>5 · Export</h2>
+      <label>Size
+        <select id="export-size">
+          <option value="0">Square 1080 × 1080</option>
+          <option value="1">Portrait 1080 × 1350</option>
+          <option value="2">Wide 1920 × 1080</option>
+        </select>
+      </label>
+      <button type="button" data-action="export" class="accent">Download this PNG</button>
+      <button type="button" data-action="export-all">Download all three sizes</button>
+      <p class="note">PNG, no watermark, ready to post.</p>
+    </section>
+  </aside>
 </main>
-<script type="module" src="./src/main.js"></script>
+
+<footer class="colophon">
+  Built for the make.fun bounty — an offline web app, its own art, no Rockstar artwork or fonts.
+</footer>
+
+<script type="module" src="src/main.js"></script>
 </body>
 </html>

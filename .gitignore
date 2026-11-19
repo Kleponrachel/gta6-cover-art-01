@@ -1,3 +1,4 @@
-# build outputs and dependencies (never committed)
+# Vice Coast Cover Studio — build outputs and local clutter, never committed.
 out/
 node_modules/
+.DS_Store
