@@ -1,6 +1,7 @@
 <!doctype html>
-<!-- Vice Coast Cover Studio — turn your photos into GTA 6-style cover art.
-     Offline, in the browser: pick a layout and a grade, letter it, export PNG. -->
+<!-- Vice Coast Cover Studio — press your photos into GTA 6-style cover art.
+     Fully offline, in the browser: choose a composition and a palette,
+     letter it, export the PNG. No upload, no watermark. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -9,82 +10,82 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="masthead">
-  <div class="brand">
-    <span class="brand-mark">VC</span>
+<header class="topbar">
+  <div class="logo">
+    <span class="logo-badge">VC</span>
     <div>
       <h1>Vice Coast Cover Studio</h1>
       <p>Your photos, pressed into a Leonida poster — offline, no watermark.</p>
     </div>
   </div>
-  <div class="mast-actions">
+  <div class="top-actions">
     <button type="button" data-action="undo" disabled>↩ Undo</button>
     <button type="button" data-action="redo" disabled>↪ Redo</button>
     <button type="button" data-action="shuffle" class="accent">🎲 Surprise me</button>
   </div>
 </header>
 
-<main class="workbench">
-  <section class="press-room" aria-label="Poster preview">
-    <div class="canvas-wrap">
-      <canvas id="stage" width="800" height="800"></canvas>
-      <p class="hint">Click a panel to pick it · drag to move its photo · scroll to zoom</p>
+<main class="bench">
+  <section class="press" aria-label="Poster preview">
+    <div class="frame-box">
+      <canvas id="poster" width="800" height="800"></canvas>
+      <p class="hint-line">Click a panel to select it · drag to move its photo · scroll to zoom</p>
     </div>
-    <div id="dropzone" class="dropzone" role="button" tabindex="0">
+    <div id="drop" class="drop" role="button" tabindex="0">
       <strong>Drop photos here</strong> or click to choose up to 9 images — they never leave your machine.
-      <input id="file-input" type="file" accept="image/*" multiple hidden>
+      <input id="filePick" type="file" accept="image/*" multiple hidden>
     </div>
     <div id="tray" class="tray" aria-label="Your photos"></div>
   </section>
 
-  <aside class="control-rail">
-    <section class="panel">
+  <aside class="rail">
+    <section class="card">
       <h2>1 · Photos</h2>
       <button type="button" data-action="samples">Load the five sample photos</button>
-      <p class="note">Panels fill in order. Click a thumbnail to put that photo in the picked panel.</p>
+      <p class="note">Panels fill in order. Click a thumbnail to put that photo in the selected panel.</p>
     </section>
 
-    <section class="panel">
-      <h2>2 · Layout &amp; grade</h2>
-      <label>Layout
-        <select id="layout"></select>
+    <section class="card">
+      <h2>2 · Composition &amp; palette</h2>
+      <label>Composition
+        <select id="composition"></select>
       </label>
-      <label>Grade
-        <select id="grade"></select>
+      <label>Palette
+        <select id="palette"></select>
       </label>
-      <label>Photo zoom — picked panel
-        <input id="zoom" type="range" min="100" max="400" value="100">
+      <label>Photo zoom — selected panel
+        <input id="zoomAmt" type="range" min="100" max="400" value="100">
       </label>
-      <button type="button" data-action="reset-crop">Reset the picked panel's crop</button>
+      <button type="button" data-action="reset">Reset the selected panel's crop</button>
     </section>
 
-    <section class="panel">
+    <section class="card">
       <h2>3 · Lettering</h2>
-      <label>Title
-        <input id="title" type="text" value="VICE CITY" maxlength="40">
+      <label>Headline
+        <input id="headline" type="text" value="VICE CITY" maxlength="40">
       </label>
-      <label>Subtitle
-        <input id="subtitle" type="text" value="a Leonida story" maxlength="60">
+      <label>Tagline
+        <input id="tagline" type="text" value="a Leonida story" maxlength="60">
       </label>
-      <label>Badge
-        <input id="badge" type="text" value="VI" maxlength="6">
+      <label>Emblem
+        <input id="emblem" type="text" value="VI" maxlength="6">
       </label>
     </section>
 
-    <section class="panel">
+    <section class="card">
       <h2>4 · Print finish</h2>
       <label>Film grain
-        <input id="grain" type="range" min="0" max="100" value="60">
+        <input id="grainAmt" type="range" min="0" max="100" value="60">
       </label>
       <label>Vignette
-        <input id="vignette" type="range" min="0" max="100" value="60">
+        <input id="shadeAmt" type="range" min="0" max="100" value="60">
       </label>
     </section>
 
-    <section class="panel export-panel">
+    <section class="card export-card">
       <h2>5 · Export</h2>
       <label>Size
-        <select id="export-size">
+        <select id="sizePick">
           <option value="0">Square 1080 × 1080</option>
           <option value="1">Portrait 1080 × 1350</option>
           <option value="2">Wide 1920 × 1080</option>
@@ -97,7 +98,7 @@
   </aside>
 </main>
 
-<footer class="colophon">
+<footer class="foot">
   Built for the make.fun bounty — an offline web app, its own art, no Rockstar artwork or fonts.
 </footer>
 

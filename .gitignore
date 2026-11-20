@@ -1,4 +1,6 @@
 # Vice Coast Cover Studio — build outputs and local clutter, never committed.
 out/
+dist/
 node_modules/
 .DS_Store
+*.log
