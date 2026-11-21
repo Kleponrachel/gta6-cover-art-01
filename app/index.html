@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Coast Cover Studio — GTA 6 Cover Art</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>NEON COAST <span>Cover Studio</span></h1>
+  <p class="tag">Turn any photo into GTA 6-style cover art — offline, in your browser.</p>
+</header>
+<main>
+  <section class="stage">
+    <canvas id="cover" width="1080" height="1080"></canvas>
+    <div class="hint">Click a panel to select it, then pick a photo · drag a panel to pan · scroll to zoom</div>
+  </section>
+  <aside class="panel">
+    <label>Headline <input id="headline" value="VICE COAST" maxlength="40"></label>
+    <label>Subline <input id="subline" value="Sunset Heist" maxlength="60"></label>
+    <div class="group"><h2>Layout</h2><div id="layouts" class="buttons"></div></div>
+    <div class="group"><h2>Grade</h2><div id="grades" class="buttons"></div></div>
+    <div class="group"><h2>Photos</h2><div id="samples" class="thumbs"></div>
+      <label class="upload">Upload your own photo <input id="upload" type="file" accept="image/*" multiple></label>
+    </div>
+    <div class="actions">
+      <button id="undo">Undo</button>
+      <button id="redo">Redo</button>
+      <button id="export" class="primary">Export 3 PNG sizes</button>
+    </div>
+    <p id="status" class="status">Ready.</p>
+  </aside>
+</main>
+<script type="module" src="src/workbench.js"></script>
+</body>
+</html>
